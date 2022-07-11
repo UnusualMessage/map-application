@@ -1,0 +1,10 @@
+# ide settings
+.idea
+
+# npm modules
+node_modules
+
+# builds
+build
+build-prod
+build-dev

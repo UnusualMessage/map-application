@@ -1,0 +1,50 @@
+{
+  "name": "ol-webpack-react-ts",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build-dev": "npx webpack --config config/webpack.entry.config.js --env mode=dev",
+    "build": "npx webpack --config config/webpack.entry.config.js --env mode=prod",
+    "start": "npx webpack serve --config config/webpack.entry.config.js --env mode=dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/ol": "^6.5.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-table": "^7.7.12",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "mobx": "^6.6.1",
+    "mobx-react-lite": "^3.4.0",
+    "ol": "^6.14.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-table": "^7.8.0"
+  }
+}
