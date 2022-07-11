@@ -1,0 +1,47 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*::selection {
+  background: black;
+  color: white;
+}
+
+*::-moz-selection {
+  background: black;
+  color: white;
+}
+
+* {
+  margin: 0;
+  font-family: "AT Open Sans", sans-serif;
+}
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root {
+  min-width: 320px;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+}

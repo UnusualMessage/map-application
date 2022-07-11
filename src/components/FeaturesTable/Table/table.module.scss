@@ -1,0 +1,28 @@
+.table {
+  font-size: 14px;
+  width: 100%;
+
+  .head {
+	.row {
+	  .item {
+		padding: 5px;
+		border: 2px solid black;
+	  }
+	}
+  }
+
+  .body {
+	.row {
+	  cursor: pointer;
+
+	  &:hover {
+		background: greenyellow;
+	  }
+
+	  .item {
+		padding: 5px;
+		border: 2px solid black;
+	  }
+	}
+  }
+}

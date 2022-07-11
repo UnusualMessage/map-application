@@ -1,0 +1,13 @@
+.switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-size: 14px;
+	gap: 5px;
+  }
+}
