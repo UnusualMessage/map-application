@@ -20,8 +20,13 @@ module.exports = {
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
-				{from: path.resolve(__dirname, "../public", "data"), to: "[name][ext]"},
-				{from: path.resolve(__dirname, "../public", "images"), to: "[name][ext]"}
+				{from: path.resolve(__dirname, "../public"), to: "[path][name][ext]",
+					globOptions: {
+						dot: true,
+						gitignore: true,
+						ignore: ["**.html"]
+					}
+				},
 			]
 		})
 	],
