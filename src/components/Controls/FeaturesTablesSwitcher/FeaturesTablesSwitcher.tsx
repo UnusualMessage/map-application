@@ -7,7 +7,7 @@ import CurrentStateStore from "../../../stores/CurrentStateStore";
 import {geoJsonId, csvId} from "../../../data/config";
 
 const FeaturesTablesSwitcher = () => {
-	const onChange : React.FormEventHandler<HTMLInputElement> = (e) => {
+	const onChange: React.FormEventHandler<HTMLInputElement> = (e) => {
 		const element = e.target as HTMLInputElement;
 		
 		CurrentStateStore.setTable(element.value);

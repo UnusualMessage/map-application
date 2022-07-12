@@ -19,7 +19,7 @@ const FeatureOverlay = () => {
 	useEffect(() => {
 		const element = overlayRef.current as HTMLDivElement;
 		
-		const overlay : Overlay = new Overlay({
+		const overlay: Overlay = new Overlay({
 			element: element,
 			offset: overlayOffset,
 			id: overlayId

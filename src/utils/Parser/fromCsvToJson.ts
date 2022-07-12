@@ -2,14 +2,14 @@ import {Strategy} from "../../types/Strategy";
 import fromJsonToGeoJson from "./fromJsonToGeoJson";
 import {FeatureCollection} from "../../types/FeatureCollection";
 
-const fromCsvToJson : Strategy = (file: string) : FeatureCollection => {
+const fromCsvToJson: Strategy = (file: string): FeatureCollection => {
 	const rows = file.split("\n");
 	const headers = rows[0].split(";");
 
 	const result = [];
 
 	for (let i = 1; i < rows.length; ++i) {
-		const record : {[index: string] : string} = {};
+		const record: {[index: string]: string} = {};
 		
 		const columns = rows[i].split(";");
 

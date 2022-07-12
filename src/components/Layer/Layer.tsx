@@ -11,7 +11,7 @@ import CurrentStateStore from "../../stores/CurrentStateStore";
 import {defaultVisibility, style} from "../../data/config";
 import {Strategy} from "../../types/Strategy";
 
-const Layer = ({ sourceUrl, strategy, layerId } : Props) => {
+const Layer = ({ sourceUrl, strategy, layerId }: Props) => {
 	runInAction(async () => {
 		await FeaturesStore.readGroup(
 			sourceUrl,
@@ -59,9 +59,9 @@ const Layer = ({ sourceUrl, strategy, layerId } : Props) => {
 };
 
 interface Props {
-	sourceUrl : string,
-	strategy : Strategy,
-	layerId : string
+	sourceUrl: string,
+	strategy: Strategy,
+	layerId: string
 }
 
 export default observer(Layer);

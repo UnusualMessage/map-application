@@ -15,8 +15,8 @@ type Group = {
 }
 
 class FeaturesStore {
-	service : FileService;
-	groups : Group[];
+	service: FileService;
+	groups: Group[];
 	
 	constructor() {
 		this.service = new FileService();
@@ -25,7 +25,7 @@ class FeaturesStore {
 		makeAutoObservable(this);
 	}
 
-	getCurrentFeaturesCount = (id : string, filter : string) : number | undefined => {
+	getCurrentFeaturesCount = (id: string, filter: string): number | undefined => {
 		const features = this.getFeaturesById(id, filter);
 		
 		if (features) {
@@ -35,12 +35,12 @@ class FeaturesStore {
 		return undefined;
 	};
 
-	getFeaturesByIndex = (index : number, filter : string) : Feature[] => {
+	getFeaturesByIndex = (index: number, filter: string): Feature[] => {
 		const group = this.groups[index];
 		return toJS(this.getFilteredFeatures(group.featureCollection.features, filter));
 	};
 
-	getFeaturesById = (id : string, filter : string) : Feature[] | undefined => {
+	getFeaturesById = (id: string, filter: string): Feature[] | undefined => {
 		if (this.groups.length === 0) {
 			return undefined;
 		}
@@ -54,7 +54,7 @@ class FeaturesStore {
 		return undefined;
 	};
 
-	getPagedFeaturesById = (id : string, filter : string, page : number) : Feature[] | undefined => {
+	getPagedFeaturesById = (id: string, filter: string, page: number): Feature[] | undefined => {
 		if (this.groups.length === 0) {
 			return undefined;
 		}
@@ -68,7 +68,7 @@ class FeaturesStore {
 		return undefined;
 	};
 
-	getPagedFilteredFeatures = (features : Feature[] , filter : string, page : number) : Feature[] => {
+	getPagedFilteredFeatures = (features: Feature[] , filter: string, page: number): Feature[] => {
 		if (page === 0) {
 			page = 1;
 		}
@@ -99,7 +99,7 @@ class FeaturesStore {
 		return toJS(result);
 	};
 
-	getFilteredFeatures = (features : Feature[], filter : string) : Feature[] => {
+	getFilteredFeatures = (features: Feature[], filter: string): Feature[] => {
 		return features.filter(feature => {
 			const keys = Object.keys(feature.properties);
 			for (const key of keys) {
@@ -112,9 +112,9 @@ class FeaturesStore {
 		});
 	};
 
-	readGroup = async (url : string, strategy : Strategy, id : string) : Promise<void> => {
+	readGroup = async (url: string, strategy: Strategy, id: string): Promise<void> => {
 		try {
-			const file : string = await this.service.get(url);
+			const file: string = await this.service.get(url);
 
 			const parser = new Parser(file, strategy);
 			const featureCollection = parser.parse();

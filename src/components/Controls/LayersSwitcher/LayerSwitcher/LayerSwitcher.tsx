@@ -6,7 +6,7 @@ import css from "./layer-switcher.module.scss";
 import MapStore from "../../../../stores/MapStore";
 import CurrentStateStore from "../../../../stores/CurrentStateStore";
 
-const LayerSwitcher = ({id, text, label} : Props) => {
+const LayerSwitcher = ({id, text, label}: Props) => {
 	const onChange = () => {
 		MapStore.stopAnimation();
 		

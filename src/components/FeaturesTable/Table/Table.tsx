@@ -6,7 +6,7 @@ import MapStore from "../../../stores/MapStore";
 
 import css from "./table.module.scss";
 
-const Table = ({data, columns} : Props) => {
+const Table = ({data, columns}: Props) => {
 	const {
 		getTableProps,
 		getTableBodyProps,
@@ -59,7 +59,7 @@ const Table = ({data, columns} : Props) => {
 };
 
 interface Props {
-	data: {[index: string] : string}[],
+	data: {[index: string]: string}[],
 	columns: {
 		Header: string,
 		accessor: string

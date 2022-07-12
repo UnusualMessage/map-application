@@ -1,6 +1,6 @@
 import {FeatureCollection} from "../../types/FeatureCollection";
 
-const fromTextToJson = (file: string) : FeatureCollection => {
+const fromTextToJson = (file: string): FeatureCollection => {
 	return JSON.parse(file);
 };
 

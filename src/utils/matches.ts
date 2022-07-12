@@ -1,4 +1,4 @@
-const matches = (filter: string, ...values : string[]) : boolean => {
+const matches = (filter: string, ...values: string[]): boolean => {
 	const regExp = /['"\s]+/g;
 
 	filter = filter?.toLowerCase().replace(regExp, "");

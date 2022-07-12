@@ -18,8 +18,8 @@ type Layer = {
 };
 
 class MapStore {
-	map : Map | null;
-	layers : Layer[];
+	map: Map | null;
+	layers: Layer[];
 	
 	constructor() {
 		this.map = null;
@@ -28,11 +28,11 @@ class MapStore {
 		makeAutoObservable(this);
 	}
 
-	getLayerById = (id : string) : VectorLayer<VectorSource> | undefined => {
+	getLayerById = (id: string): VectorLayer<VectorSource> | undefined => {
 		return this.layers.find(layer => layer.id === id)?.layer;
 	};
 
-	filterFeatures = (filter : string) => {
+	filterFeatures = (filter: string) => {
 		for (let i = 0; i < this.layers.length; ++i) {
 			const geoJson = {
 				type: "FeatureCollection",
@@ -47,20 +47,20 @@ class MapStore {
 		}
 	};
 
-	addLayer = (layer : Layer) => {
+	addLayer = (layer: Layer) => {
 		this.layers.push(layer);
 		this.map?.addLayer(layer.layer);
 	};
 
-	addOverlay = (overlay : Overlay) => {
+	addOverlay = (overlay: Overlay) => {
 		this.map?.addOverlay(overlay);
 	};
 
-	getOverlayById = (id : number) => {
+	getOverlayById = (id: number) => {
 		return this.map?.getOverlayById(id);
 	};
 
-	changeLayerVisibility = (visible : boolean, id : string) => {
+	changeLayerVisibility = (visible: boolean, id: string) => {
 		const layer = this.layers.find(item => item.id === id)?.layer;
 		layer?.setVisible(visible);
 	};
@@ -79,9 +79,9 @@ class MapStore {
 		}
 	};
 
-	show = (data : {[index: string] : string}, isLonLat : boolean) => {
+	show = (data: {[index: string]: string}, isLonLat: boolean) => {
 		this.stopAnimation();
-		let coordinates : Coordinate = [Number(data[lonKey]), Number(data[latKey])];
+		let coordinates: Coordinate = [Number(data[lonKey]), Number(data[latKey])];
 
 		if (isLonLat) {
 			coordinates = fromLonLat(coordinates);
@@ -116,7 +116,7 @@ class MapStore {
 		});
 	};
 
-	initMap = (ref : HTMLDivElement, view : View) => {
+	initMap = (ref: HTMLDivElement, view: View) => {
 		this.map = new Map({
 			layers: [new TileLayer({
 				source: new OSM()
@@ -127,7 +127,7 @@ class MapStore {
 		});
 	};
 
-	setOnClick = (layer : VectorLayer<VectorSource>) => {
+	setOnClick = (layer: VectorLayer<VectorSource>) => {
 		this.map?.on("click", (e) => {
 			const pixel = this.map?.getEventPixel(e.originalEvent);
 			
@@ -135,7 +135,7 @@ class MapStore {
 				return;
 			}
 			
-			layer.getFeatures(pixel).then((features : Feature[]) => {
+			layer.getFeatures(pixel).then((features: Feature[]) => {
 				const feature = features.length ? features[0] : undefined;
 
 				if (feature !== undefined) {
@@ -155,7 +155,7 @@ class MapStore {
 		});
 	};
 
-	setOverlay = (feature : Feature) => {
+	setOverlay = (feature: Feature) => {
 		const overlay = this.map?.getOverlayById(overlayId);
 		const overlayElement = overlay?.getElement();
 		const properties = feature.getProperties();
@@ -180,10 +180,10 @@ class MapStore {
 		overlay?.setPosition(point.getFlatCoordinates());
 	};
 
-	startTour = (...ids : string[]) => {
+	startTour = (...ids: string[]) => {
 		const view = this.map?.getView();
 
-		const layers : VectorLayer<VectorSource>[] = [];
+		const layers: VectorLayer<VectorSource>[] = [];
 		for (const id of ids) {
 			const layer = this.getLayerById(id);
 
@@ -198,10 +198,10 @@ class MapStore {
 			return;
 		}
 
-		const features : Feature[] = [];
+		const features: Feature[] = [];
 		
 		for (const layer of layers) {
-			const layerFeatures : Feature[] | undefined = layer.getSource()?.getFeatures();
+			const layerFeatures: Feature[] | undefined = layer.getSource()?.getFeatures();
 			
 			if (layerFeatures === undefined) {
 				continue;
@@ -210,12 +210,12 @@ class MapStore {
 			features.push(...layerFeatures);
 		}
 
-		const to = (index : number, limit : number) => {
+		const to = (index: number, limit: number) => {
 			if (index >= limit) {
 				return;
 			}
 
-			const callback = (complete : boolean) => {
+			const callback = (complete: boolean) => {
 				if (complete) {
 					to(index + 1, limit);
 				}

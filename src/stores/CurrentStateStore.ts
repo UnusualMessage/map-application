@@ -18,12 +18,12 @@ type Visibility = {
 }
 
 class CurrentStateStore {
-	page : number;
-	zoom : number;
-	center : number[];
-	filter : string;
-	table : string;
-	layersVisibilities : Visibility[];
+	page: number;
+	zoom: number;
+	center: number[];
+	filter: string;
+	table: string;
+	layersVisibilities: Visibility[];
 	
 	constructor() {
 		const layers = localStorage.getItem(localStorageLayersLabel);
@@ -57,7 +57,7 @@ class CurrentStateStore {
 		this.toPage(this.page - 1);
 	};
 
-	toPage = (page : number) => {
+	toPage = (page: number) => {
 		this.page = page;
 		this.savePage();
 	};
@@ -70,7 +70,7 @@ class CurrentStateStore {
 		return this.page;
 	};
 	
-	setFilter = (filter : string) => {
+	setFilter = (filter: string) => {
 		this.filter = filter;
 		localStorage.setItem(localStorageFilterLabel, filter);
 	};
@@ -79,7 +79,7 @@ class CurrentStateStore {
 		return this.filter;
 	};
 
-	setTable = (table : string) => {
+	setTable = (table: string) => {
 		this.table = table;
 	};
 
@@ -87,7 +87,7 @@ class CurrentStateStore {
 		return this.table;
 	};
 	
-	setCenter = (center : number[]) => {
+	setCenter = (center: number[]) => {
 		localStorage.setItem(localStorageCenterLabel, JSON.stringify(center));
 		this.center = center;
 	};
@@ -96,7 +96,7 @@ class CurrentStateStore {
 		return this.center;
 	};
 	
-	setZoom = (zoom : number) => {
+	setZoom = (zoom: number) => {
 		localStorage.setItem(localStorageZoomLabel, zoom.toString());
 		this.zoom = zoom;
 	};
@@ -105,7 +105,7 @@ class CurrentStateStore {
 		return this.zoom;
 	};
 	
-	addLayerVisibility = (visible : boolean, id : string) => {
+	addLayerVisibility = (visible: boolean, id: string) => {
 		const visibility = this.getLayerVisibilityById(id);
 		
 		if (visibility != undefined) {
@@ -120,11 +120,11 @@ class CurrentStateStore {
 		localStorage.setItem(localStorageLayersLabel, JSON.stringify(this.layersVisibilities));
 	};
 	
-	getLayerVisibilityById = (id : string) : Visibility | undefined => {
+	getLayerVisibilityById = (id: string): Visibility | undefined => {
 		return this.layersVisibilities?.find((visibility: Visibility) => visibility.id === id);
 	};
 	
-	isLayerVisible = (id : string) : boolean | undefined => {
+	isLayerVisible = (id: string): boolean | undefined => {
 		return this.getLayerVisibilityById(id)?.visible;
 	};
 }

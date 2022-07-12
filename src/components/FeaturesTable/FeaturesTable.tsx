@@ -27,7 +27,7 @@ const FeaturesTable = () => {
 			return [];
 		}
 		
-		let first = features.find((feature : Feature) => Object.keys(feature.properties).find(key => key === "note"));
+		let first = features.find((feature: Feature) => Object.keys(feature.properties).find(key => key === "note"));
 		first = first ? first : features[0];
 		
 		for (const key of Object.keys(first.properties)) {
@@ -60,7 +60,7 @@ const FeaturesTable = () => {
 		}
 		
 		for (const feature of features) {
-			const record : {[index: string] : string} = {};
+			const record: {[index: string]: string} = {};
 			
 			for (const key of Object.keys(feature.properties)) {
 				record[key] = feature.properties[key];

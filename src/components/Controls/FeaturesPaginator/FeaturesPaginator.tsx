@@ -35,7 +35,7 @@ const FeaturesPaginator = () => {
 		CurrentStateStore.toPage(pagesCount);
 	};
 	
-	const onInput : React.FormEventHandler<HTMLInputElement> = (e) => {
+	const onInput: React.FormEventHandler<HTMLInputElement> = (e) => {
 		const element = e.target as HTMLInputElement;
 		const page = element.value;
 		

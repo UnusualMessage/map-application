@@ -7,15 +7,15 @@ import css from "./map.module.scss";
 import MapStore from "../../stores/MapStore";
 import CurrentStateStore from "../../stores/CurrentStateStore";
 
-const MultiLayerMap = ({ children } : Props) => {
+const MultiLayerMap = ({ children }: Props) => {
 	const mapRef = useRef<HTMLDivElement>(null);
 	
 	useEffect(() => {
 		if (MapStore.getMap() == null) {
-			const zoom : number = CurrentStateStore.getZoom();
-			const center : number[] = CurrentStateStore.getCenter();
+			const zoom: number = CurrentStateStore.getZoom();
+			const center: number[] = CurrentStateStore.getCenter();
 			
-			const view : View = new View({
+			const view: View = new View({
 				center: center,
 				zoom: zoom
 			});

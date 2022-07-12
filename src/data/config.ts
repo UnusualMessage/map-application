@@ -2,7 +2,7 @@ import {fromLonLat} from "ol/proj";
 import {Coordinate} from "ol/coordinate";
 import {Icon, Style} from "ol/style";
 
-const defaultCenter : Coordinate = fromLonLat([-77.018627, 38.899924]);
+const defaultCenter: Coordinate = fromLonLat([-77.018627, 38.899924]);
 const defaultZoom  = 15;
 const defaultVisibility  = true;
 
@@ -35,7 +35,7 @@ const image = new Icon({
 	src: "./images/icon.png",
 });
 
-const style : Style = new Style({
+const style: Style = new Style({
 	image: image
 });
 

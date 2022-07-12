@@ -3,17 +3,17 @@ import {Feature} from "../../types/Feature";
 import {FeatureCollection} from "../../types/FeatureCollection";
 
 type json = {
-	[index: string] : string
+	[index: string]: string
 }[]
 
-const fromJsonToGeoJson = (json : json) : FeatureCollection => {
-	const result : FeatureCollection = {
+const fromJsonToGeoJson = (json: json): FeatureCollection => {
+	const result: FeatureCollection = {
 		type: "FeatureCollection",
 		features: []
 	};
 
 	for (let i = 0; i < json.length; ++i) {
-		const feature : Feature = {
+		const feature: Feature = {
 			type: "Feature",
 			properties: {
 

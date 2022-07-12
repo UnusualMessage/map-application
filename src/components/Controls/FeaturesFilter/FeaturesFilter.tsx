@@ -6,7 +6,7 @@ import CurrentStateStore from "../../../stores/CurrentStateStore";
 import MapStore from "../../../stores/MapStore";
 
 const FeaturesFilter = () => {
-	const onInput : React.FormEventHandler<HTMLInputElement> = (e) => {
+	const onInput: React.FormEventHandler<HTMLInputElement> = (e) => {
 		const element = e.target as HTMLInputElement;
 		
 		MapStore.stopAnimation();
