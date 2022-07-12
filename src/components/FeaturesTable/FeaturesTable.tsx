@@ -22,11 +22,7 @@ const FeaturesTable = () => {
 	const headers = useMemo(() => {
 		const result = [];
 		
-		if (features === undefined || !visible) {
-			return [];
-		}
-		
-		if (features.length === 0) {
+		if (features === undefined || features.length === 0 || !visible) {
 			return [];
 		}
 		
@@ -58,7 +54,7 @@ const FeaturesTable = () => {
 	const data = useMemo(() => {
 		const result = [];
 		
-		if (features === undefined) {
+		if (features === undefined || features.length === 0) {
 			return [];
 		}
 		

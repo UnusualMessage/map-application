@@ -29,10 +29,15 @@ const Table = ({ data, columns } : Props) => {
 			<tbody className={`${css.body}`} {...getTableBodyProps()}>
 			{rows.map(row => {
 				prepareRow(row)
+				
+				const onRowClick = () => {
+					MapStore.show(row.original, true);
+				}
+				
 				return (
 					<tr className={`${css.row}`}
 					    {...row.getRowProps()}
-					    onClick={() => { MapStore.show(row.original, true) } } >
+					    onClick={onRowClick} >
 						
 						{row.cells.map(cell => {
 							return (

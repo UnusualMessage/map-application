@@ -7,7 +7,7 @@ const defaultZoom : number = 15;
 const defaultVisibility : boolean = true;
 
 const geoJsonId : string = "geo";
-const geoJsonUrl : string = "./data/bars.geojson";
+const geoJsonUrl : string = "./data/bars.json";
 
 const csvId : string = "csv";
 const csvUrl : string = "./data/portals.csv";
