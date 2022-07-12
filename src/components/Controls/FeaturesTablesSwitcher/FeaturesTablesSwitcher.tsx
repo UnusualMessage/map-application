@@ -12,7 +12,7 @@ const FeaturesTablesSwitcher = () => {
 		
 		CurrentStateStore.setTable(element.value);
 		CurrentStateStore.toPage(1);
-	}
+	};
 	
 	return(
 		<div className={`${css.switcher}`}>
@@ -31,6 +31,6 @@ const FeaturesTablesSwitcher = () => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default observer(FeaturesTablesSwitcher);

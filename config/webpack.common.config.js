@@ -15,9 +15,11 @@ module.exports = {
 			filename: "index.html",
 			template: path.resolve(__dirname, "../public", "index.html")
 		}),
+
 		new MiniCssExtractPlugin({
 			filename: "./static/css/style.[contenthash].css",
 		}),
+
 		new CopyWebpackPlugin({
 			patterns: [
 				{

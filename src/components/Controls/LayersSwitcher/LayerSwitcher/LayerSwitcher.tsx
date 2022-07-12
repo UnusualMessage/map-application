@@ -1,3 +1,4 @@
+import React from "react";
 import {observer} from "mobx-react-lite";
 
 import css from "./layer-switcher.module.scss";
@@ -12,7 +13,7 @@ const LayerSwitcher = ({id, text, label} : Props) => {
 		const visible = CurrentStateStore.isLayerVisible(id);
 		MapStore.changeLayerVisibility(!visible, id);
 		CurrentStateStore.addLayerVisibility(!visible, id);
-	}
+	};
 	
 	return(
 		<div className={`${css.item}`}>
@@ -22,8 +23,8 @@ const LayerSwitcher = ({id, text, label} : Props) => {
 			       onChange={onChange}/>
 			<label htmlFor={label}>{text}</label>
 		</div>
-	)
-}
+	);
+};
 
 interface Props {
 	id: string,

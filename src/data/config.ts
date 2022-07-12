@@ -3,32 +3,32 @@ import {Coordinate} from "ol/coordinate";
 import {Icon, Style} from "ol/style";
 
 const defaultCenter : Coordinate = fromLonLat([-77.018627, 38.899924]);
-const defaultZoom : number = 15;
-const defaultVisibility : boolean = true;
+const defaultZoom  = 15;
+const defaultVisibility  = true;
 
-const geoJsonId : string = "geo";
-const geoJsonUrl : string = "./data/bars.json";
+const geoJsonId  = "geo";
+const geoJsonUrl  = "./data/bars.json";
 
-const csvId : string = "csv";
-const csvUrl : string = "./data/portals.csv";
+const csvId  = "csv";
+const csvUrl  = "./data/portals.csv";
 
-const overlayId : number = 1;
+const overlayId  = 1;
 const overlayOffset = [-125, -10];
 
-const lonKey : string = "lon";
-const latKey : string = "lat";
+const lonKey  = "lon";
+const latKey  = "lat";
 
-const ruNameKey : string = "name_ru";
-const enNameKey : string = "name_en";
+const ruNameKey  = "name_ru";
+const enNameKey  = "name_en";
 
-const localStorageCenterLabel : string = "center";
-const localStorageZoomLabel : string = "zoom";
-const localStorageLayersLabel : string = "layers";
-const localStorageFilterLabel : string = "filter";
-const localStoragePageLabel : string = "page";
+const localStorageCenterLabel  = "center";
+const localStorageZoomLabel  = "zoom";
+const localStorageLayersLabel  = "layers";
+const localStorageFilterLabel  = "filter";
+const localStoragePageLabel  = "page";
 
-const pageSize : number = 15;
-const defaultPage : number = 1;
+const pageSize  = 15;
+const defaultPage  = 1;
 
 const image = new Icon({
 	anchor: [0.5, 0.5],
@@ -37,7 +37,7 @@ const image = new Icon({
 
 const style : Style = new Style({
 	image: image
-})
+});
 
 export {
 	defaultZoom,

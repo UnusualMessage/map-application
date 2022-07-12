@@ -16,7 +16,7 @@ type Group = {
 
 class FeaturesStore {
 	service : FileService;
-	groups : Group[]
+	groups : Group[];
 	
 	constructor() {
 		this.service = new FileService();
@@ -33,12 +33,12 @@ class FeaturesStore {
 		}
 		
 		return undefined;
-	}
+	};
 
 	getFeaturesByIndex = (index : number, filter : string) : Feature[] => {
 		const group = this.groups[index];
 		return toJS(this.getFilteredFeatures(group.featureCollection.features, filter));
-	}
+	};
 
 	getFeaturesById = (id : string, filter : string) : Feature[] | undefined => {
 		if (this.groups.length === 0) {
@@ -51,8 +51,8 @@ class FeaturesStore {
 			return toJS(this.getFilteredFeatures(group.featureCollection.features, filter));
 		}
 		
-		return undefined
-	}
+		return undefined;
+	};
 
 	getPagedFeaturesById = (id : string, filter : string, page : number) : Feature[] | undefined => {
 		if (this.groups.length === 0) {
@@ -66,7 +66,7 @@ class FeaturesStore {
 		}
 		
 		return undefined;
-	}
+	};
 
 	getPagedFilteredFeatures = (features : Feature[] , filter : string, page : number) : Feature[] => {
 		if (page === 0) {
@@ -75,7 +75,7 @@ class FeaturesStore {
 
 		const filteredFeatures = this.getFilteredFeatures(features, filter);
 
-		let start = (page - 1) * pageSize;
+		const start = (page - 1) * pageSize;
 
 		if (start >= features.length) {
 			return [];
@@ -97,24 +97,24 @@ class FeaturesStore {
 		}
 
 		return toJS(result);
-	}
+	};
 
 	getFilteredFeatures = (features : Feature[], filter : string) : Feature[] => {
 		return features.filter(feature => {
 			const keys = Object.keys(feature.properties);
-			for (let key of keys) {
+			for (const key of keys) {
 				if (key === ruNameKey || key === enNameKey) {
-					return matches(filter, feature.properties[enNameKey], feature.properties[ruNameKey])
+					return matches(filter, feature.properties[enNameKey], feature.properties[ruNameKey]);
 				}
 			}
 			
-			return matches(filter, feature.properties.name)
+			return matches(filter, feature.properties.name);
 		});
-	}
+	};
 
 	readGroup = async (url : string, strategy : Strategy, id : string) : Promise<void> => {
 		try {
-			let file : string = await this.service.get(url);
+			const file : string = await this.service.get(url);
 
 			const parser = new Parser(file, strategy);
 			const featureCollection = parser.parse();
@@ -130,11 +130,11 @@ class FeaturesStore {
 					id: id,
 					featureCollection: featureCollection
 				});
-			})
+			});
 		} catch(error) {
 			console.log(error);
 		}
-	}
+	};
 }
 
 export default new FeaturesStore();

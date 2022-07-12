@@ -6,10 +6,10 @@ export default class Parser {
 	
 	constructor(file : string, strategy : Strategy) {
 		this.file = file;
-		this.strategy = strategy
+		this.strategy = strategy;
 	}
 	
 	parse = () => {
 		return this.strategy(this.file);
-	}
+	};
 }

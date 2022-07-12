@@ -14,23 +14,25 @@ const FeatureOverlay = () => {
 		const overlay = MapStore.getOverlayById(overlayId);
 		overlay?.setPosition(undefined);
 		MapStore.stopAnimation();
-	}
+	};
 
 	useEffect(() => {
+		const element = overlayRef.current as HTMLDivElement;
+		
 		const overlay : Overlay = new Overlay({
-			element: overlayRef.current!,
+			element: element,
 			offset: overlayOffset,
 			id: overlayId
 		});
 
 		MapStore.addOverlay(overlay);
-	}, [])
+	}, []);
 
 	return(
 		<div className={css.overlay} ref={overlayRef} onMouseLeave={onMouseLeave}>
 
 		</div>
 	);
-}
+};
 
 export default observer(FeatureOverlay);

@@ -8,7 +8,7 @@ import FeaturesStore from "../../../stores/FeaturesStore";
 import {pageSize} from "../../../data/config";
 
 const FeaturesPaginator = () => {
-	let featuresCount = FeaturesStore.getCurrentFeaturesCount(
+	const featuresCount = FeaturesStore.getCurrentFeaturesCount(
 		CurrentStateStore.getTable(),
 		CurrentStateStore.getFilter()
 	);
@@ -29,28 +29,28 @@ const FeaturesPaginator = () => {
 		if (currentPage !== pagesCount) {
 			CurrentStateStore.toNextPage();
 		}
-	}
+	};
 	
 	const onLast = () => {
 		CurrentStateStore.toPage(pagesCount);
-	}
+	};
 	
 	const onInput : React.FormEventHandler<HTMLInputElement> = (e) => {
 		const element = e.target as HTMLInputElement;
-		let page = element.value;
+		const page = element.value;
 		
 		CurrentStateStore.toPage(Number(page));
-	}
+	};
 	
 	const onPrevious = () => {
 		if (currentPage > 1) {
 			CurrentStateStore.toPreviousPage();
 		}
-	}
+	};
 	
 	const onFirst = () => {
 		CurrentStateStore.toPage(1);
-	}
+	};
 	
 	return(
 		<div className={`${css.paginator}`}>
@@ -79,7 +79,7 @@ const FeaturesPaginator = () => {
 				{">>"}
 			</button>
 		</div>
-	)
-}
+	);
+};
 
 export default observer(FeaturesPaginator);

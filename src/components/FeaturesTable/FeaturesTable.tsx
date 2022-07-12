@@ -1,3 +1,4 @@
+import React from "react";
 import {observer} from "mobx-react-lite";
 import {useMemo} from "react";
 import {toLonLat} from "ol/proj";
@@ -29,7 +30,7 @@ const FeaturesTable = () => {
 		let first = features.find((feature : Feature) => Object.keys(feature.properties).find(key => key === "note"));
 		first = first ? first : features[0];
 		
-		for (let key of Object.keys(first.properties)) {
+		for (const key of Object.keys(first.properties)) {
 			const record = {
 				Header: key,
 				accessor: key
@@ -46,7 +47,7 @@ const FeaturesTable = () => {
 		result.push({
 			Header: latKey,
 			accessor: latKey
-		})
+		});
 		
 		return result;
 	}, [features, visible]);
@@ -58,10 +59,10 @@ const FeaturesTable = () => {
 			return [];
 		}
 		
-		for (let feature of features) {
+		for (const feature of features) {
 			const record : {[index: string] : string} = {};
 			
-			for (let key of Object.keys(feature.properties)) {
+			for (const key of Object.keys(feature.properties)) {
 				record[key] = feature.properties[key];
 			}
 			
@@ -88,7 +89,7 @@ const FeaturesTable = () => {
 					: <div className={`${css.placeholder}`}>ЗДЕСЬ ПУСТО...</div>
 			}
 		</div>
-	)
-}
+	);
+};
 
 export default observer(FeaturesTable);

@@ -19,7 +19,7 @@ type Layer = {
 
 class MapStore {
 	map : Map | null;
-	layers : Layer[]
+	layers : Layer[];
 	
 	constructor() {
 		this.map = null;
@@ -30,14 +30,14 @@ class MapStore {
 
 	getLayerById = (id : string) : VectorLayer<VectorSource> | undefined => {
 		return this.layers.find(layer => layer.id === id)?.layer;
-	}
+	};
 
 	filterFeatures = (filter : string) => {
 		for (let i = 0; i < this.layers.length; ++i) {
 			const geoJson = {
 				type: "FeatureCollection",
 				features: FeaturesStore.getFeaturesByIndex(i, filter)
-			}
+			};
 
 			const source = new VectorSource({
 				features: new GeoJSON().readFeatures(geoJson)
@@ -45,25 +45,25 @@ class MapStore {
 
 			this.layers[i].layer.setSource(source);
 		}
-	}
+	};
 
 	addLayer = (layer : Layer) => {
 		this.layers.push(layer);
 		this.map?.addLayer(layer.layer);
-	}
+	};
 
 	addOverlay = (overlay : Overlay) => {
 		this.map?.addOverlay(overlay);
-	}
+	};
 
 	getOverlayById = (id : number) => {
 		return this.map?.getOverlayById(id);
-	}
+	};
 
 	changeLayerVisibility = (visible : boolean, id : string) => {
 		const layer = this.layers.find(item => item.id === id)?.layer;
 		layer?.setVisible(visible);
-	}
+	};
 
 	stopAnimation = () => {
 		const view = this.map?.getView();
@@ -77,7 +77,7 @@ class MapStore {
 		if (zoom !== undefined) {
 			view.setZoom(zoom);
 		}
-	}
+	};
 
 	show = (data : {[index: string] : string}, isLonLat : boolean) => {
 		this.stopAnimation();
@@ -99,11 +99,11 @@ class MapStore {
 		overlayElement.innerHTML = `
 			${keys.map(key => {
 				if (key === lonKey || key === latKey) {
-					return ``
+					return "";
 				}
 
-				return `<span>${key + ": " + data[key]}</span>`
-			}).join(' ')}
+				return `<span>${key + ": " + data[key]}</span>`;
+			}).join(" ")}
 		`;
 
 		overlay?.setPosition(coordinates);
@@ -113,8 +113,8 @@ class MapStore {
 			zoom: 18,
 			center: coordinates,
 			duration: 3000
-		})
-	}
+		});
+	};
 
 	initMap = (ref : HTMLDivElement, view : View) => {
 		this.map = new Map({
@@ -125,10 +125,10 @@ class MapStore {
 			target: ref,
 			view: view
 		});
-	}
+	};
 
 	setOnClick = (layer : VectorLayer<VectorSource>) => {
-		this.map?.on('click', (e) => {
+		this.map?.on("click", (e) => {
 			const pixel = this.map?.getEventPixel(e.originalEvent);
 			
 			if (pixel === undefined) {
@@ -151,9 +151,9 @@ class MapStore {
 
 					this.setOverlay(feature);
 				}
-			})
+			});
 		});
-	}
+	};
 
 	setOverlay = (feature : Feature) => {
 		const overlay = this.map?.getOverlayById(overlayId);
@@ -169,22 +169,22 @@ class MapStore {
 		overlayElement.innerHTML = `
 			${keys.map(key => {
 				if (key === "geometry") {
-					return ``
+					return "";
 				}
 
-				return `<span>${key + ": " + properties[key]}</span>`
-			}).join(' ')}`;
+				return `<span>${key + ": " + properties[key]}</span>`;
+			}).join(" ")}`;
 		
 		const point = feature.getGeometry() as Point;
 
 		overlay?.setPosition(point.getFlatCoordinates());
-	}
+	};
 
 	startTour = (...ids : string[]) => {
 		const view = this.map?.getView();
 
 		const layers : VectorLayer<VectorSource>[] = [];
-		for (let id of ids) {
+		for (const id of ids) {
 			const layer = this.getLayerById(id);
 
 			if (layer === undefined || !layer.getVisible()) {
@@ -200,7 +200,7 @@ class MapStore {
 
 		const features : Feature[] = [];
 		
-		for (let layer of layers) {
+		for (const layer of layers) {
 			const layerFeatures : Feature[] | undefined = layer.getSource()?.getFeatures();
 			
 			if (layerFeatures === undefined) {
@@ -219,7 +219,7 @@ class MapStore {
 				if (complete) {
 					to(index + 1, limit);
 				}
-			}
+			};
 
 			this.setOverlay(features[index]);
 			
@@ -234,15 +234,15 @@ class MapStore {
 				center: coordinates,
 				zoom: 16,
 				duration: 2500
-			}, callback)
-		}
+			}, callback);
+		};
 
 		to(0, features.length);
-	}
+	};
 
 	getMap = () => {
 		return this.map;
-	}
+	};
 }
 
 export default new MapStore();

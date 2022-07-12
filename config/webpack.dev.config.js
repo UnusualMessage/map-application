@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
 	output: {
@@ -30,6 +31,12 @@ module.exports = {
 		open: true,
 		hot: true
 	},
+
+	plugins: [
+		new ESLintPlugin({
+			extensions: ["js", "jsx", "ts", "tsx"],
+		})
+	],
 
 	module: {
 		rules: [

@@ -1,6 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
 	output: {
@@ -16,10 +16,6 @@ module.exports = {
 		hints: 'error',
 	},
 
-	plugins: [
-		new BundleAnalyzerPlugin()
-	],
-
 	optimization: {
 		chunkIds: 'deterministic',
 		moduleIds: 'deterministic',
@@ -34,6 +30,12 @@ module.exports = {
 			},
 		},
 	},
+
+	plugins: [
+		new ESLintPlugin({
+			extensions: ["js", "jsx", "ts", "tsx"],
+		})
+	],
 
 	module: {
 		rules: [

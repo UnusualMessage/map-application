@@ -40,7 +40,7 @@ class CurrentStateStore {
 		const zoom = localStorage.getItem(localStorageZoomLabel);
 		this.zoom = zoom ? Number(zoom) : defaultZoom;
 
-		const filter = localStorage.getItem(localStorageFilterLabel)
+		const filter = localStorage.getItem(localStorageFilterLabel);
 		this.filter = filter ? filter : "";
 
 		this.page = defaultPage;
@@ -51,59 +51,59 @@ class CurrentStateStore {
 
 	toNextPage = () => {
 		this.toPage(this.page + 1);
-	}
+	};
 
 	toPreviousPage = () => {
 		this.toPage(this.page - 1);
-	}
+	};
 
 	toPage = (page : number) => {
 		this.page = page;
 		this.savePage();
-	}
+	};
 
 	savePage = () => {
 		localStorage.setItem(localStoragePageLabel, this.page.toString());
-	}
+	};
 
 	getPage = () => {
 		return this.page;
-	}
+	};
 	
 	setFilter = (filter : string) => {
 		this.filter = filter;
 		localStorage.setItem(localStorageFilterLabel, filter);
-	}
+	};
 
 	getFilter = () => {
 		return this.filter;
-	}
+	};
 
 	setTable = (table : string) => {
 		this.table = table;
-	}
+	};
 
 	getTable = () => {
 		return this.table;
-	}
+	};
 	
 	setCenter = (center : number[]) => {
 		localStorage.setItem(localStorageCenterLabel, JSON.stringify(center));
 		this.center = center;
-	}
+	};
 
 	getCenter = () => {
 		return this.center;
-	}
+	};
 	
 	setZoom = (zoom : number) => {
 		localStorage.setItem(localStorageZoomLabel, zoom.toString());
 		this.zoom = zoom;
-	}
+	};
 
 	getZoom = () => {
 		return this.zoom;
-	}
+	};
 	
 	addLayerVisibility = (visible : boolean, id : string) => {
 		const visibility = this.getLayerVisibilityById(id);
@@ -114,19 +114,19 @@ class CurrentStateStore {
 			this.layersVisibilities.push({
 				visible: visible,
 				id: id
-			})
+			});
 		}
 		
 		localStorage.setItem(localStorageLayersLabel, JSON.stringify(this.layersVisibilities));
-	}
+	};
 	
 	getLayerVisibilityById = (id : string) : Visibility | undefined => {
 		return this.layersVisibilities?.find((visibility: Visibility) => visibility.id === id);
-	}
+	};
 	
 	isLayerVisible = (id : string) : boolean | undefined => {
 		return this.getLayerVisibilityById(id)?.visible;
-	}
+	};
 }
 
 export default new CurrentStateStore();

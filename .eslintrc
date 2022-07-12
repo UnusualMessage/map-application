@@ -1,0 +1,30 @@
+{
+  "parser": "@typescript-eslint/parser",
+
+  "env": {
+    "es6": true
+  },
+
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+
+  "ignorePatterns": ["**/*.css", "**/*.scss", "**/*.sass"],
+
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "double"]
+  },
+
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}

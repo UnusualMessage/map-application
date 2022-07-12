@@ -10,7 +10,7 @@ const fromJsonToGeoJson = (json : json) : FeatureCollection => {
 	const result : FeatureCollection = {
 		type: "FeatureCollection",
 		features: []
-	}
+	};
 
 	for (let i = 0; i < json.length; ++i) {
 		const feature : Feature = {
@@ -25,9 +25,9 @@ const fromJsonToGeoJson = (json : json) : FeatureCollection => {
 
 				]
 			}
-		}
+		};
 
-		for (let key of Object.keys(json[i])) {
+		for (const key of Object.keys(json[i])) {
 			if (key === lonKey || key === latKey) {
 				continue;
 			}
@@ -43,6 +43,6 @@ const fromJsonToGeoJson = (json : json) : FeatureCollection => {
 	}
 
 	return result;
-}
+};
 
 export default fromJsonToGeoJson;

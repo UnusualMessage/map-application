@@ -12,14 +12,14 @@ const FeaturesFilter = () => {
 		MapStore.stopAnimation();
 		CurrentStateStore.setFilter(element.value);
 		MapStore.filterFeatures(CurrentStateStore.getFilter());
-	}
+	};
 	
 	return(
 		<div className={`${css.filter}`}>
 			<label htmlFor={"filter"}>Поиск</label>
 			<input id={"filter"} placeholder={"name"} onInput={onInput} value={CurrentStateStore.getFilter()}/>
 		</div>
-	)
-}
+	);
+};
 
 export default observer(FeaturesFilter);

@@ -1,3 +1,4 @@
+import React from "react";
 import css from "./controls.module.scss";
 
 import LayersSwitcher from "./LayersSwitcher";
@@ -15,7 +16,7 @@ const Controls = () => {
 			<FeaturesPaginator/>
 			<FeaturesPresentation/>
 		</div>
-	)
-}
+	);
+};
 
 export default Controls;

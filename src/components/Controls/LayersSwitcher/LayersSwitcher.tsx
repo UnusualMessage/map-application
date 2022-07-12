@@ -1,3 +1,4 @@
+import React from "react";
 import {observer} from "mobx-react-lite";
 
 import css from "./layers-switcher.module.scss";
@@ -11,7 +12,7 @@ const LayersSwitcher = () => {
 			<LayerSwitcher id={geoJsonId} text={"Слой GeoJSON"} label={"geojson"} />
 			<LayerSwitcher id={csvId} text={"Слой CSV"} label={"csv"} />
 		</div>
-	)
-}
+	);
+};
 
 export default observer(LayersSwitcher);

@@ -1,3 +1,4 @@
+import React from "react";
 import {runInAction} from "mobx";
 import {observer} from "mobx-react-lite";
 import VectorSource from "ol/source/Vector";
@@ -23,7 +24,7 @@ const Layer = ({ sourceUrl, strategy, layerId } : Props) => {
 		const geoJson = {
 			type: "FeatureCollection",
 			features: features
-		}
+		};
 		
 		const vectorSource = new VectorSource({
 			features: new GeoJSON().readFeatures(geoJson)
@@ -34,7 +35,7 @@ const Layer = ({ sourceUrl, strategy, layerId } : Props) => {
 			style: style
 		});
 		
-		let visibility = CurrentStateStore.getLayerVisibilityById(layerId);
+		const visibility = CurrentStateStore.getLayerVisibilityById(layerId);
 		
 		let visible = defaultVisibility;
 		if (visibility !== undefined) {
@@ -49,13 +50,13 @@ const Layer = ({ sourceUrl, strategy, layerId } : Props) => {
 		});
 		
 		MapStore.setOnClick(vectorLayer);
-	});
+	}).then(_ => _);
 	
 	return(
 		<>
 		</>
 	);
-}
+};
 
 interface Props {
 	sourceUrl : string,

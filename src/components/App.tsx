@@ -1,5 +1,6 @@
-import {observer} from "mobx-react-lite";
-import {lazy} from "react";
+import React from "react";
+import { observer } from "mobx-react-lite";
+import { lazy } from "react";
 
 const MultiLayerMap = lazy(() => import("./MultiLayerMap"));
 const Layer = lazy(() => import("./Layer"));
@@ -9,10 +10,10 @@ const FeaturesTable = lazy(() => import("./FeaturesTable"));
 
 import fromTextToJson from "../utils/Parser/fromTextToJson";
 import fromCsvToJson from "../utils/Parser/fromCsvToJson";
-import {geoJsonId, csvId, geoJsonUrl, csvUrl} from "../data/config";
+import { geoJsonId, csvId, geoJsonUrl, csvUrl } from "../data/config";
 
 function App() {
-	return (
+  return (
 		<>
 			<Controls/>
 			<MultiLayerMap>
@@ -22,7 +23,7 @@ function App() {
 			<FeatureOverlay/>
 			<FeaturesTable/>
 		</>
-	);
+  );
 }
 
 export default observer(App);

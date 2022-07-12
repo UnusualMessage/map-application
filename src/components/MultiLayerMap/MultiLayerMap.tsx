@@ -12,8 +12,8 @@ const MultiLayerMap = ({ children } : Props) => {
 	
 	useEffect(() => {
 		if (MapStore.getMap() == null) {
-			let zoom : number = CurrentStateStore.getZoom();
-			let center : number[] = CurrentStateStore.getCenter();
+			const zoom : number = CurrentStateStore.getZoom();
+			const center : number[] = CurrentStateStore.getCenter();
 			
 			const view : View = new View({
 				center: center,
@@ -31,7 +31,7 @@ const MultiLayerMap = ({ children } : Props) => {
 				if (center !== undefined) {
 					CurrentStateStore.setCenter(center);
 				}
-			}
+			};
 			
 			const onCenterChange = () => {
 				const center = view.getCenter();
@@ -39,22 +39,21 @@ const MultiLayerMap = ({ children } : Props) => {
 				if (center !== undefined) {
 					CurrentStateStore.setCenter(center);
 				}
-			}
+			};
 			
 			view.on("change:resolution", onZoomChange);
 			view.on("change:center", onCenterChange);
 			
-			MapStore.initMap(mapRef.current!, view);
+			const element = mapRef.current as HTMLDivElement;
+			MapStore.initMap(element, view);
 			
 			return () => {
 				view.un("change:center", onCenterChange);
 				view.un("change:resolution", onZoomChange);
-			}
+			};
 		}
 		
-		return () => {
-		
-		}
+		return;
 	}, []);
 	
 	return(
