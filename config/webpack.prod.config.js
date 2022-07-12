@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	output: {
@@ -14,6 +15,10 @@ module.exports = {
 	performance: {
 		hints: 'error',
 	},
+
+	plugins: [
+		new BundleAnalyzerPlugin()
+	],
 
 	optimization: {
 		chunkIds: 'deterministic',
@@ -48,7 +53,7 @@ module.exports = {
 							importLoaders: 1,
 							modules: {
 								mode: "local",
-								localIdentName: '[name]__[local]__[hash:base64:5]',
+								localIdentName: '[name]--[local]--[hash:base64:5]',
 							},
 						},
 					},

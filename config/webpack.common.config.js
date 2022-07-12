@@ -20,7 +20,9 @@ module.exports = {
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
-				{from: path.resolve(__dirname, "../public"), to: "[path][name][ext]",
+				{
+					from: path.resolve(__dirname, "../public"),
+					to: "[path][name][ext]",
 					globOptions: {
 						dot: true,
 						gitignore: true,
@@ -28,7 +30,7 @@ module.exports = {
 					}
 				},
 			]
-		})
+		}),
 	],
 
 	resolve: {
@@ -39,11 +41,6 @@ module.exports = {
 
 	module: {
 		rules: [
-			{
-				test: /\.svg/,
-				type: 'asset/inline'
-			},
-
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
