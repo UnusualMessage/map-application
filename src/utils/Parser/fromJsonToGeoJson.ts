@@ -4,7 +4,7 @@ import {FeatureCollection} from "../../types/FeatureCollection";
 
 type json = {
 	[index: string]: string
-}[]
+}[];
 
 const fromJsonToGeoJson = (json: json): FeatureCollection => {
 	const result: FeatureCollection = {

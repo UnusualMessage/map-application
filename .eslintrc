@@ -17,8 +17,11 @@
   ],
 
   "rules": {
-    "semi": ["error", "always"],
-    "quotes": ["error", "double"],
+    "semi": "off",
+    "@typescript-eslint/semi": ["error", "always"],
+
+    "quotes": "off",
+    "@typescript-eslint/quotes": ["error", "double"],
 
     "@typescript-eslint/type-annotation-spacing": ["error", {
       "before": false,

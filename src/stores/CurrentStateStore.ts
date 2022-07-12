@@ -15,7 +15,7 @@ import {
 type Visibility = {
 	id: string,
 	visible: boolean
-}
+};
 
 class CurrentStateStore {
 	page: number;

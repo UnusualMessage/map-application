@@ -12,7 +12,7 @@ import {Feature} from "../types/Feature";
 type Group = {
 	featureCollection: FeatureCollection,
 	id: string
-}
+};
 
 class FeaturesStore {
 	service: FileService;
