@@ -12,14 +12,14 @@ import {Point} from "ol/geom";
 import FeaturesStore from "./FeaturesStore";
 import {latKey, lonKey, overlayId} from "../data/config";
 
-type Layer = {
+interface Layer {
 	id: string,
 	layer: VectorLayer<VectorSource>
-};
+}
 
 class MapStore {
-	map: Map | null;
-	layers: Layer[];
+	private map: Map | null;
+	private readonly layers: Layer[];
 	
 	constructor() {
 		this.map = null;
@@ -79,7 +79,7 @@ class MapStore {
 		}
 	};
 
-	show = (data: {[index: string]: string}, isLonLat: boolean) => {
+	show = (data: Record<string, string>, isLonLat: boolean) => {
 		this.stopAnimation();
 		let coordinates: Coordinate = [Number(data[lonKey]), Number(data[latKey])];
 
@@ -144,7 +144,7 @@ class MapStore {
 					const point = feature.getGeometry() as Point;
 					
 					view?.animate({
-						center: point?.getFlatCoordinates(),
+						center: point.getFlatCoordinates(),
 						zoom: 20,
 						duration: 2000,
 					});

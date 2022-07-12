@@ -12,18 +12,18 @@ import {
 	localStorageZoomLabel
 } from "../data/config";
 
-type Visibility = {
+interface Visibility {
 	id: string,
 	visible: boolean
-};
+}
 
 class CurrentStateStore {
-	page: number;
-	zoom: number;
-	center: number[];
-	filter: string;
-	table: string;
-	layersVisibilities: Visibility[];
+	private page: number;
+	private zoom: number;
+	private center: number[];
+	private filter: string;
+	private table: string;
+	private readonly layersVisibilities: Visibility[];
 	
 	constructor() {
 		const layers = localStorage.getItem(localStorageLayersLabel);
@@ -121,7 +121,7 @@ class CurrentStateStore {
 	};
 	
 	getLayerVisibilityById = (id: string): Visibility | undefined => {
-		return this.layersVisibilities?.find((visibility: Visibility) => visibility.id === id);
+		return this.layersVisibilities.find((visibility: Visibility) => visibility.id === id);
 	};
 	
 	isLayerVisible = (id: string): boolean | undefined => {

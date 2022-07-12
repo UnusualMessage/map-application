@@ -1,9 +1,9 @@
-export type Feature = {
+export interface Feature {
 	type: "Feature",
-	properties: {[index: string]: string},
+	properties: Record<string, string>,
 	
 	geometry: {
 		type: "Point",
 		coordinates: number[]
 	}
-};
+}

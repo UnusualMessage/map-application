@@ -1,6 +1,6 @@
 import {Feature} from "./Feature";
 
-export type FeatureCollection = {
+export interface FeatureCollection {
 	type: "FeatureCollection",
 	features: Feature[]
-};
+}

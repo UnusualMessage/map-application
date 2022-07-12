@@ -9,14 +9,14 @@ import {Strategy} from "../types/Strategy";
 import {FeatureCollection} from "../types/FeatureCollection";
 import {Feature} from "../types/Feature";
 
-type Group = {
+interface Group {
 	featureCollection: FeatureCollection,
 	id: string
-};
+}
 
 class FeaturesStore {
-	service: FileService;
-	groups: Group[];
+	private service: FileService;
+	private readonly groups: Group[];
 	
 	constructor() {
 		this.service = new FileService();
@@ -119,9 +119,9 @@ class FeaturesStore {
 			const parser = new Parser(file, strategy);
 			const featureCollection = parser.parse();
 
-			for (let i = 0; i < featureCollection.features.length; ++i) {
-				featureCollection.features[i].geometry.coordinates = fromLonLat(
-					featureCollection.features[i].geometry.coordinates
+			for (const feature of featureCollection.features) {
+				feature.geometry.coordinates = fromLonLat(
+					feature.geometry.coordinates
 				);
 			}
 

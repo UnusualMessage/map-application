@@ -60,7 +60,7 @@ const FeaturesTable = () => {
 		}
 		
 		for (const feature of features) {
-			const record: {[index: string]: string} = {};
+			const record: Record<string, string> = {};
 			
 			for (const key of Object.keys(feature.properties)) {
 				record[key] = feature.properties[key];

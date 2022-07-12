@@ -9,7 +9,7 @@ const fromCsvToJson: Strategy = (file: string): FeatureCollection => {
 	const result = [];
 
 	for (let i = 1; i < rows.length; ++i) {
-		const record: {[index: string]: string} = {};
+		const record: Record<string, string> = {};
 		
 		const columns = rows[i].split(";");
 

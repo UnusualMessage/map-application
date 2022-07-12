@@ -13,16 +13,18 @@
 
   "extends": [
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/strict"
   ],
 
   "rules": {
-    "semi": "off",
-    "@typescript-eslint/semi": ["error", "always"],
-
     "quotes": "off",
-    "@typescript-eslint/quotes": ["error", "double"],
+    "semi": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "react/jsx-key": "off",
 
+    "@typescript-eslint/semi": ["error", "always"],
+    "@typescript-eslint/quotes": ["error", "double"],
     "@typescript-eslint/type-annotation-spacing": ["error", {
       "before": false,
       "after": true

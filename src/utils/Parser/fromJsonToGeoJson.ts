@@ -2,9 +2,7 @@ import {latKey, lonKey} from "../../data/config";
 import {Feature} from "../../types/Feature";
 import {FeatureCollection} from "../../types/FeatureCollection";
 
-type json = {
-	[index: string]: string
-}[];
+type json = Record<string, string>[];
 
 const fromJsonToGeoJson = (json: json): FeatureCollection => {
 	const result: FeatureCollection = {
@@ -12,7 +10,7 @@ const fromJsonToGeoJson = (json: json): FeatureCollection => {
 		features: []
 	};
 
-	for (let i = 0; i < json.length; ++i) {
+	for (const record of json) {
 		const feature: Feature = {
 			type: "Feature",
 			properties: {
@@ -27,16 +25,16 @@ const fromJsonToGeoJson = (json: json): FeatureCollection => {
 			}
 		};
 
-		for (const key of Object.keys(json[i])) {
+		for (const key of Object.keys(record)) {
 			if (key === lonKey || key === latKey) {
 				continue;
 			}
 			
-			feature.properties[key] = json[i][key];
+			feature.properties[key] = record[key];
 		}
 
-		feature.geometry.coordinates.push(Number(json[i][lonKey]));
-		feature.geometry.coordinates.push(Number(json[i][latKey]));
+		feature.geometry.coordinates.push(Number(record[lonKey]));
+		feature.geometry.coordinates.push(Number(record[latKey]));
 
 		result.features.push(feature);
 

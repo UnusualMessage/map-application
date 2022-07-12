@@ -2,9 +2,9 @@ import React from "react";
 import {useTable} from "react-table";
 import {observer} from "mobx-react-lite";
 
-import MapStore from "../../../stores/MapStore";
-
 import css from "./table.module.scss";
+
+import MapStore from "../../../stores/MapStore";
 
 const Table = ({data, columns}: Props) => {
 	const {
@@ -18,10 +18,10 @@ const Table = ({data, columns}: Props) => {
 	return (
 		<table className={`${css.table}`} {...getTableProps()}>
 			<thead className={`${css.head}`}>
-			{headerGroups.map((headerGroup, idx) => (
-				<tr {...headerGroup.getHeaderGroupProps()} className={`${css.row}`} key={idx}>
-					{headerGroup.headers.map((column, idx) => (
-						<th className={`${css.item}`} {...column.getHeaderProps()} key={idx}>
+			{headerGroups.map(headerGroup => (
+				<tr {...headerGroup.getHeaderGroupProps()} className={`${css.row}`}>
+					{headerGroup.headers.map(column => (
+						<th className={`${css.item}`} {...column.getHeaderProps()}>
 							{column.render("Header")}
 						</th>
 					))}
@@ -29,7 +29,7 @@ const Table = ({data, columns}: Props) => {
 			))}
 			</thead>
 			<tbody className={`${css.body}`} {...getTableBodyProps()}>
-			{rows.map((row, idx) => {
+			{rows.map(row => {
 				prepareRow(row);
 				
 				const onRowClick = () => {
@@ -40,12 +40,11 @@ const Table = ({data, columns}: Props) => {
 					<tr className={`${css.row}`}
 					    {...row.getRowProps()}
 					    onClick={onRowClick}
-					    key={idx}
 					>
 						
 						{row.cells.map(cell => {
 							return (
-								<td className={`${css.item}`} {...cell.getCellProps()} key={idx}>
+								<td className={`${css.item}`} {...cell.getCellProps()}>
 									{cell.render("Cell")}
 								</td>
 							);
@@ -59,7 +58,7 @@ const Table = ({data, columns}: Props) => {
 };
 
 interface Props {
-	data: {[index: string]: string}[],
+	data: Record<string, string>[],
 	columns: {
 		Header: string,
 		accessor: string
