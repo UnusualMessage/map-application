@@ -8,6 +8,7 @@ import {enNameKey, pageSize, ruNameKey} from "../data/config";
 import {Strategy} from "../types/Strategy";
 import {FeatureCollection} from "../types/FeatureCollection";
 import {Feature} from "../types/Feature";
+import File from "../api/File";
 
 interface Group {
 	featureCollection: FeatureCollection,
@@ -24,9 +25,13 @@ class FeaturesStore {
 		
 		makeAutoObservable(this);
 	}
+	
+	getLayersCount = () => {
+		return this.groups.length;
+	};
 
 	getCurrentFeaturesCount = (id: string, filter: string): number | undefined => {
-		const features = this.getFeaturesById(id, filter);
+		const features = this.getFilteredFeaturesById(id, filter);
 		
 		if (features) {
 			return this.getFilteredFeatures(features, filter).length;
@@ -35,12 +40,16 @@ class FeaturesStore {
 		return undefined;
 	};
 
-	getFeaturesByIndex = (index: number, filter: string): Feature[] => {
+	getFilteredFeaturesByIndex = (index: number, filter: string): Feature[] => {
 		const group = this.groups[index];
 		return toJS(this.getFilteredFeatures(group.featureCollection.features, filter));
 	};
+	
+	getFeaturesById = (id: string): Feature[] | undefined => {
+		return toJS(this.groups.find(group => group.id === id)?.featureCollection.features);
+	};
 
-	getFeaturesById = (id: string, filter: string): Feature[] | undefined => {
+	getFilteredFeaturesById = (id: string, filter: string): Feature[] | undefined => {
 		if (this.groups.length === 0) {
 			return undefined;
 		}
@@ -53,49 +62,33 @@ class FeaturesStore {
 		
 		return undefined;
 	};
-
-	getPagedFeaturesById = (id: string, filter: string, page: number): Feature[] | undefined => {
-		if (this.groups.length === 0) {
-			return undefined;
-		}
-
-		const group = this.groups.find(group => group.id === id);
-		
-		if (group) {
-			return toJS(this.getPagedFilteredFeatures(group.featureCollection.features, filter, page));
-		}
-		
-		return undefined;
-	};
-
-	getPagedFilteredFeatures = (features: Feature[] , filter: string, page: number): Feature[] => {
+	
+	getPagedFeatures = (features: Feature[], page: number): Feature[] => {
 		if (page === 0) {
 			page = 1;
 		}
-
-		const filteredFeatures = this.getFilteredFeatures(features, filter);
-
+		
 		const start = (page - 1) * pageSize;
-
+		
 		if (start >= features.length) {
 			return [];
 		}
-
+		
 		let end = pageSize * page;
 		
-		if (start + pageSize > filteredFeatures.length) {
-			end = start + pageSize - (pageSize + start - filteredFeatures.length);
+		if (start + pageSize > features.length) {
+			end = start + pageSize - (pageSize + start - features.length);
 		}
 		
-		if (filteredFeatures.length <= pageSize) {
-			end = filteredFeatures.length;
+		if (features.length <= pageSize) {
+			end = features.length;
 		}
-
+		
 		const result = [];
 		for (let i = start; i < end; ++i) {
-			result.push(filteredFeatures[i]);
+			result.push(features[i]);
 		}
-
+		
 		return toJS(result);
 	};
 
@@ -114,9 +107,9 @@ class FeaturesStore {
 
 	readGroup = async (url: string, strategy: Strategy, id: string): Promise<void> => {
 		try {
-			const file: string = await this.service.get(url);
+			const file: File = await this.service.get(url);
 
-			const parser = new Parser(file, strategy);
+			const parser = new Parser(file.text, strategy);
 			const featureCollection = parser.parse();
 
 			for (const feature of featureCollection.features) {

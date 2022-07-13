@@ -36,7 +36,7 @@ class MapStore {
 		for (let i = 0; i < this.layers.length; ++i) {
 			const geoJson = {
 				type: "FeatureCollection",
-				features: FeaturesStore.getFeaturesByIndex(i, filter)
+				features: FeaturesStore.getFilteredFeaturesByIndex(i, filter)
 			};
 
 			const source = new VectorSource({

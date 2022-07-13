@@ -12,13 +12,32 @@ import {latKey, lonKey} from "../../data/config";
 import {Feature} from "../../types/Feature";
 
 const FeaturesTable = () => {
-	const features = FeaturesStore.getPagedFeaturesById(
-		CurrentStateStore.getTable(),
-		CurrentStateStore.getFilter(),
-		CurrentStateStore.getPage()
-	);
+	const currentTable = CurrentStateStore.getTable();
+	const currentPage = CurrentStateStore.getPage();
+	const currentFilter = CurrentStateStore.getFilter();
+	const count = FeaturesStore.getLayersCount();
 	
-	const visible = CurrentStateStore.isLayerVisible(CurrentStateStore.getTable());
+	let features = useMemo(() => {
+		return FeaturesStore.getFeaturesById(currentTable);
+	}, [currentTable, count]);
+	
+	features = useMemo(() => {
+		if (features === undefined) {
+			return [];
+		}
+		
+		return FeaturesStore.getFilteredFeatures(features, currentFilter);
+	}, [features, currentFilter]);
+	
+	features = useMemo(() => {
+		if (features === undefined) {
+			return [];
+		}
+		
+		return FeaturesStore.getPagedFeatures(features, currentPage);
+	}, [features, currentPage]);
+	
+	const visible = CurrentStateStore.isLayerVisible(currentTable);
 	
 	const headers = useMemo(() => {
 		const result = [];

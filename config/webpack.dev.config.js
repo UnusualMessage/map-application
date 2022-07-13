@@ -18,6 +18,11 @@ module.exports = {
 	devServer: {
 		port: 3000,
 
+		proxy: {
+			target: "http://localhost:4548",
+			context: ["/api"]
+		},
+
 		client: {
 			logging: 'error',
 			overlay: {

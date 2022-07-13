@@ -19,7 +19,7 @@ const Layer = ({ sourceUrl, strategy, layerId }: Props) => {
 			layerId
 		);
 		
-		const features = FeaturesStore.getFeaturesById(layerId, CurrentStateStore.getFilter());
+		const features = FeaturesStore.getFilteredFeaturesById(layerId, CurrentStateStore.getFilter());
 		
 		const geoJson = {
 			type: "FeatureCollection",

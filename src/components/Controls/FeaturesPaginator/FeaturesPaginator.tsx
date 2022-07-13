@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import React from "react";
+import React, {useMemo} from "react";
 
 import css from "./paginator.module.scss";
 
@@ -8,22 +8,25 @@ import FeaturesStore from "../../../stores/FeaturesStore";
 import {pageSize} from "../../../data/config";
 
 const FeaturesPaginator = () => {
-	const featuresCount = FeaturesStore.getCurrentFeaturesCount(
-		CurrentStateStore.getTable(),
-		CurrentStateStore.getFilter()
-	);
+	const currentTable = CurrentStateStore.getTable();
+	const currentFilter = CurrentStateStore.getFilter();
+	const currentPage = CurrentStateStore.getPage();
+	const count = FeaturesStore.getLayersCount();
+	
+	const featuresCount = useMemo(() => {
+		return FeaturesStore.getCurrentFeaturesCount(currentTable, currentFilter);
+	}, [currentTable, currentFilter, count]);
+	
+	const tableVisible = CurrentStateStore.isLayerVisible(currentTable);
 	
 	let pagesCount = 1;
 	if (featuresCount !== undefined) {
 		pagesCount = Math.ceil(featuresCount / pageSize);
 	}
 	
-	const tableVisible = CurrentStateStore.isLayerVisible(CurrentStateStore.getTable());
-	if (pagesCount === 0 || isNaN(pagesCount) || tableVisible === false) {
+	if (pagesCount === 0 || !tableVisible) {
 		pagesCount = 1;
 	}
-	
-	const currentPage = CurrentStateStore.getPage();
 	
 	const onNext = () => {
 		if (currentPage !== pagesCount) {

@@ -7,10 +7,10 @@ const defaultZoom = 15;
 const defaultVisibility = true;
 
 const geoJsonId = "geo";
-const geoJsonUrl = "./data/bars.json";
+const geoJsonUrl = "api/files/ea7bf158-82fa-4030-8261-f5fd107c92ca";
 
 const csvId = "csv";
-const csvUrl = "./data/portals.csv";
+const csvUrl = "api/files/3b8d5fff-7105-4325-934f-3fa796516788";
 
 const overlayId = 1;
 const overlayOffset = [-125, -10];

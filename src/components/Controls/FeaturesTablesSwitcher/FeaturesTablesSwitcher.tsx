@@ -7,6 +7,8 @@ import CurrentStateStore from "../../../stores/CurrentStateStore";
 import {geoJsonId, csvId} from "../../../data/config";
 
 const FeaturesTablesSwitcher = () => {
+	const currentTable = CurrentStateStore.getTable();
+	
 	const onChange: React.FormEventHandler<HTMLInputElement> = (e) => {
 		const element = e.target as HTMLInputElement;
 		
@@ -18,14 +20,14 @@ const FeaturesTablesSwitcher = () => {
 		<div className={`${css.switcher}`}>
 			<div className={`${css.button}`}>
 				<input type="radio" value={geoJsonId} id="geoTable" onChange={onChange}
-				       checked={CurrentStateStore.getTable() === geoJsonId}/>
+				       checked={currentTable === geoJsonId}/>
 				
 				<label htmlFor="geoTable">Таблица GeoJSON</label>
 			</div>
 			
 			<div className={`${css.button}`}>
 				<input type="radio" value={csvId} id="csvTable" onChange={onChange}
-				       checked={CurrentStateStore.getTable() === csvId}/>
+				       checked={currentTable === csvId}/>
 				
 				<label htmlFor="csvTable">Таблица CSV</label>
 			</div>
