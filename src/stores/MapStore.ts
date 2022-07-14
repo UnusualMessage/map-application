@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {Feature, Map, Overlay, View} from "ol";
 import TileLayer from "ol/layer/Tile";
-import {OSM} from "ol/source";
+import {Cluster, OSM} from "ol/source";
 import VectorSource from "ol/source/Vector";
 import {GeoJSON} from "ol/format";
 import {fromLonLat} from "ol/proj";
@@ -31,7 +31,7 @@ class MapStore {
 	getLayerById = (id: string): VectorLayer<VectorSource> | undefined => {
 		return this.layers.find(layer => layer.id === id)?.layer;
 	};
-
+	
 	filterFeatures = (filter: string) => {
 		for (let i = 0; i < this.layers.length; ++i) {
 			const geoJson = {
@@ -42,8 +42,13 @@ class MapStore {
 			const source = new VectorSource({
 				features: new GeoJSON().readFeatures(geoJson)
 			});
+			
+			const cluster = new Cluster({
+				source: source,
+				distance: 30,
+			});
 
-			this.layers[i].layer.setSource(source);
+			this.layers[i].layer.setSource(cluster);
 		}
 	};
 
@@ -145,7 +150,7 @@ class MapStore {
 					
 					view?.animate({
 						center: point.getFlatCoordinates(),
-						zoom: 20,
+						zoom: 18,
 						duration: 2000,
 					});
 
@@ -155,29 +160,42 @@ class MapStore {
 		});
 	};
 
-	setOverlay = (feature: Feature) => {
+	setOverlay = (cluster: Feature) => {
 		const overlay = this.map?.getOverlayById(overlayId);
 		const overlayElement = overlay?.getElement();
-		const properties = feature.getProperties();
+		const features = cluster.get("features");
+		
+		if (features.length >= 5) {
+			return;
+		}
+		
+		const overlayPosition = cluster.getGeometry() as Point;
 		
 		if (overlayElement === undefined) {
 			return;
 		}
 		
-		const keys = Object.keys(properties);
+		overlayElement.scrollTop = 0;
 		
-		overlayElement.innerHTML = `
+		let result = "";
+		for (const feature of features) {
+			const properties = feature.getProperties();
+			const keys = Object.keys(properties);
+			
+			result += `
 			${keys.map(key => {
 				if (key === "geometry") {
 					return "";
 				}
-
+				
 				return `<span>${key + ": " + properties[key]}</span>`;
 			}).join(" ")}`;
+			
+			result += "<hr/>";
+		}
 		
-		const point = feature.getGeometry() as Point;
-
-		overlay?.setPosition(point.getFlatCoordinates());
+		overlayElement.innerHTML = result;
+		overlay?.setPosition(overlayPosition.getFlatCoordinates());
 	};
 
 	startTour = (...ids: string[]) => {

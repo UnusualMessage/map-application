@@ -1,10 +1,12 @@
 .table {
-  font-size: 14px;
+  font-size: 13px;
   width: 100%;
+  border-collapse: collapse;
 
   .head {
 	.row {
 	  .item {
+		text-transform: uppercase;
 		padding: 5px;
 		border: 2px solid black;
 	  }
@@ -15,8 +17,16 @@
 	.row {
 	  cursor: pointer;
 
+	  &:nth-child(odd) {
+		background: white;
+	  }
+
+	  &:nth-child(even) {
+		background: white;
+	  }
+
 	  &:hover {
-		background: greenyellow;
+		background: rgba(255, 64, 128, 0.5);
 	  }
 
 	  .item {

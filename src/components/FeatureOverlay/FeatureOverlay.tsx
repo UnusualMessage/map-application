@@ -10,7 +10,7 @@ import {overlayId, overlayOffset} from "../../data/config";
 const FeatureOverlay = () => {
 	const overlayRef = useRef<HTMLDivElement>(null);
 
-	const onMouseLeave = () => {
+	const onClick = () => {
 		const overlay = MapStore.getOverlayById(overlayId);
 		overlay?.setPosition(undefined);
 		MapStore.stopAnimation();
@@ -29,7 +29,7 @@ const FeatureOverlay = () => {
 	}, []);
 
 	return(
-		<div className={css.overlay} ref={overlayRef} onMouseLeave={onMouseLeave}>
+		<div className={css.overlay} ref={overlayRef} onClick={onClick}>
 
 		</div>
 	);

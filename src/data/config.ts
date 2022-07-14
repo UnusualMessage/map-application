@@ -1,6 +1,6 @@
 import {fromLonLat} from "ol/proj";
 import {Coordinate} from "ol/coordinate";
-import {Icon, Style} from "ol/style";
+import {Fill, Stroke} from "ol/style";
 
 const defaultCenter: Coordinate = fromLonLat([-77.018627, 38.899924]);
 const defaultZoom = 15;
@@ -13,7 +13,7 @@ const csvId = "csv";
 const csvUrl = "api/files/3b8d5fff-7105-4325-934f-3fa796516788";
 
 const overlayId = 1;
-const overlayOffset = [-125, -10];
+const overlayOffset = [-110, -160];
 
 const lonKey = "lon";
 const latKey = "lat";
@@ -30,13 +30,13 @@ const localStoragePageLabel = "page";
 const pageSize = 15;
 const defaultPage = 1;
 
-const image = new Icon({
-	anchor: [0.5, 0.5],
-	src: "./images/icon.png",
+const textFill = new Fill({
+	color: "#fff",
 });
 
-const style: Style = new Style({
-	image: image
+const textStroke = new Stroke({
+	color: "rgba(0, 0, 0, 1.0)",
+	width: 2,
 });
 
 export {
@@ -60,5 +60,6 @@ export {
 	localStoragePageLabel,
 	pageSize,
 	defaultPage,
-	style
+	textFill,
+	textStroke
 };

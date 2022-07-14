@@ -46,11 +46,6 @@ const MultiLayerMap = ({ children }: Props) => {
 			
 			const element = mapRef.current as HTMLDivElement;
 			MapStore.initMap(element, view);
-			
-			return () => {
-				view.un("change:center", onCenterChange);
-				view.un("change:resolution", onZoomChange);
-			};
 		}
 		
 		return;
