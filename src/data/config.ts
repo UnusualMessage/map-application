@@ -1,10 +1,14 @@
 import {fromLonLat} from "ol/proj";
 import {Coordinate} from "ol/coordinate";
-import {Fill, Stroke} from "ol/style";
+import {Fill, Stroke, Style, Text} from "ol/style";
+import CircleStyle from "ol/style/Circle";
+import {StyleFunction} from "ol/style/Style";
+import {FeatureLike} from "ol/Feature";
 
 const defaultCenter: Coordinate = fromLonLat([-77.018627, 38.899924]);
 const defaultZoom = 15;
 const defaultVisibility = true;
+const maxZoom = 20;
 
 const geoJsonId = "geo";
 const geoJsonUrl = "api/files/ea7bf158-82fa-4030-8261-f5fd107c92ca";
@@ -39,10 +43,40 @@ const textStroke = new Stroke({
 	width: 2,
 });
 
+const getStyleWithRadius = (radius: number, size: number) => {
+	return new Style({
+		image: new CircleStyle({
+			radius: radius,
+			
+			fill: new Fill({
+				color: [255, 64, 128, 1.0],
+			}),
+		}),
+		
+		text: new Text({
+			text: size.toString(),
+			fill: textFill,
+			stroke: textStroke,
+		}),
+	});
+};
+
+const styleFunction: StyleFunction = (feature: FeatureLike) => {
+	let style;
+	const size = feature.get("features").length;
+	if (size < 20) {
+		style = getStyleWithRadius(size + 10, size);
+	} else {
+		style = getStyleWithRadius(20, size);
+	}
+	return style;
+};
+
 export {
 	defaultZoom,
 	defaultCenter,
 	defaultVisibility,
+	maxZoom,
 	geoJsonId,
 	csvId,
 	geoJsonUrl,
@@ -60,6 +94,5 @@ export {
 	localStoragePageLabel,
 	pageSize,
 	defaultPage,
-	textFill,
-	textStroke
+	styleFunction
 };

@@ -6,6 +6,8 @@ import css from "./map.module.scss";
 
 import MapStore from "../../stores/MapStore";
 import CurrentStateStore from "../../stores/CurrentStateStore";
+import {maxZoom} from "../../data/config";
+import raiseToAll from "../../utils/raiseToAll";
 
 const MultiLayerMap = ({ children }: Props) => {
 	const mapRef = useRef<HTMLDivElement>(null);
@@ -17,7 +19,8 @@ const MultiLayerMap = ({ children }: Props) => {
 			
 			const view: View = new View({
 				center: center,
-				zoom: zoom
+				zoom: zoom,
+				maxZoom: maxZoom,
 			});
 			
 			const onZoomChange = () => {

@@ -10,6 +10,10 @@ const LayerSwitcher = ({id, text, label}: Props) => {
 	const onChange = () => {
 		MapStore.stopAnimation();
 		
+		if (CurrentStateStore.getTable() === id) {
+			CurrentStateStore.toPage(1);
+		}
+		
 		const visible = CurrentStateStore.isLayerVisible(id);
 		MapStore.changeLayerVisibility(!visible, id);
 		CurrentStateStore.addLayerVisibility(!visible, id);

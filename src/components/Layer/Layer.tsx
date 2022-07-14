@@ -4,17 +4,13 @@ import {observer} from "mobx-react-lite";
 import VectorSource from "ol/source/Vector";
 import {GeoJSON} from "ol/format";
 import VectorLayer from "ol/layer/Vector";
+import {Cluster} from "ol/source";
 
 import FeaturesStore from "../../stores/FeaturesStore";
 import MapStore from "../../stores/MapStore";
 import CurrentStateStore from "../../stores/CurrentStateStore";
-import {defaultVisibility, textFill, textStroke} from "../../data/config";
+import {defaultVisibility, styleFunction} from "../../data/config";
 import {Strategy} from "../../types/Strategy";
-import {Cluster} from "ol/source";
-import CircleStyle from "ol/style/Circle";
-import {Fill, Style, Text} from "ol/style";
-import {StyleFunction} from "ol/style/Style";
-import {FeatureLike} from "ol/Feature";
 
 const Layer = ({ sourceUrl, strategy, layerId }: Props) => {
 	runInAction(async () => {
@@ -34,35 +30,6 @@ const Layer = ({ sourceUrl, strategy, layerId }: Props) => {
 		const vectorSource = new VectorSource({
 			features: new GeoJSON().readFeatures(geoJson)
 		});
-		
-		const getStyleWithRadius = (radius: number, size: number) => {
-			return new Style({
-				image: new CircleStyle({
-					radius: radius,
-					
-					fill: new Fill({
-						color: [255, 64, 128, 1.0],
-					}),
-				}),
-				
-				text: new Text({
-					text: size.toString(),
-					fill: textFill,
-					stroke: textStroke,
-				}),
-			});
-		};
-		
-		const styleFunction: StyleFunction = (feature: FeatureLike) => {
-			let style;
-			const size = feature.get("features").length;
-			if (size < 20) {
-				style = getStyleWithRadius(size + 10, size);
-			} else {
-				style = getStyleWithRadius(20, size);
-			}
-			return style;
-		};
 		
 		const cluster = new Cluster({
 			source: vectorSource,

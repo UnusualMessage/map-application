@@ -77,11 +77,7 @@ class MapStore {
 			return;
 		}
 		
-		const zoom = view.getZoom();
-		
-		if (zoom !== undefined) {
-			view.setZoom(zoom);
-		}
+		view.cancelAnimations();
 	};
 
 	show = (data: Record<string, string>, isLonLat: boolean) => {
